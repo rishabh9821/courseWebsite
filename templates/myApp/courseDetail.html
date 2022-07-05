@@ -1,0 +1,39 @@
+{% extends 'myApp/base.html' %}
+
+{% block body_block %}
+    <div class="jumbotron">
+        <h1>
+            Course Details
+        </h1>
+        <h3>
+            Course Name: {{course_detail.courseName}}
+        </h3>
+        <h3>
+            Course Professor: {{course_detail.courseProfessor}}
+        </h3>
+        <h3>
+            Course Subject: {{course_detail.courseSubject}}
+        </h3>
+    </div>
+
+    <h2>Students Enrolled in Course: </h2>
+
+    {% for student in course_detail.students.all %}
+    <ul>
+        <li>
+            <a href="{% url 'myApp:student-detail' student_pk=student.pk %}">{{ student.studentName }}</a>
+        </li>
+    </ul>
+    {% endfor %}
+    <div class="container">
+        <p>
+            <a href="{% url 'myApp:course-update' course_pk=course_detail.pk %}" class="btn btn-warning">Update Course Details</a>
+        </p>
+    </div>
+
+    <div class="container">
+        <p>
+            <a href="{% url 'myApp:course-delete' course_pk=course_detail.pk %}" class="btn btn-warning">Delete Course</a>
+        </p>
+    </div>
+{% endblock %}
